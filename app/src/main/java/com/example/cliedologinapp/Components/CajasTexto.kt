@@ -23,7 +23,8 @@ fun CajasTexto(
     onValueChange: (String) -> Unit,
     categoria: String,
     texto: String,
-    contraseña: Boolean = false
+    contraseña: Boolean = false,
+    contraseña2 : Boolean = false
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -51,7 +52,11 @@ fun CajasTexto(
                 fontSize = 16.sp
             ),
             singleLine = true,
-            visualTransformation = if (contraseña) PasswordVisualTransformation() else VisualTransformation.None,
+            visualTransformation = when {
+                contraseña -> PasswordVisualTransformation()
+                contraseña2 -> PasswordVisualTransformation()
+                else -> VisualTransformation.None
+            },
             modifier = Modifier
                 .padding(bottom = 20.dp),
             colors = TextFieldDefaults.colors(

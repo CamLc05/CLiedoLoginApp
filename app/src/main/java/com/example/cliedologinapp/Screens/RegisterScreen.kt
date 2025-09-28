@@ -4,8 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -29,12 +34,18 @@ import com.example.cliedologinapp.R
 import com.example.cliedologinapp.ui.theme.CLiedoLoginAppTheme
 
 @Composable
-fun Login(innerPadding: PaddingValues, navController: NavController) {
+fun Register(innerPadding: PaddingValues, navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var password2 by remember { mutableStateOf("") }
+    var firstname by remember { mutableStateOf("") }
+    var lastname by remember { mutableStateOf("") }
+
+
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         Image(
             painter = painterResource(id = R.drawable.fondouno),
@@ -43,10 +54,34 @@ fun Login(innerPadding: PaddingValues, navController: NavController) {
             modifier = Modifier.fillMaxSize()
         )
 
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 50.dp, start = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = { navController.popBackStack() }) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Regresar",
+                    tint = Color.White
+                )
+            }
+
+            Text(
+                "Sign Up",
+                color = Color.White,
+                fontSize = 40.sp,
+                modifier = Modifier
+                    .padding(start = 70.dp)
+            )
+        }
+
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(600.dp)
+                .height(700.dp)
                 .align(Alignment.BottomCenter)
                 .clip(RoundedCornerShape(topStart = 70.dp))
                 .background(Color.White)
@@ -58,11 +93,18 @@ fun Login(innerPadding: PaddingValues, navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text("Login",
-                    color = Color.Black,
-                    fontSize = 40.sp,
-                    modifier = Modifier
-                        .padding(bottom = 50.dp),
+                CajasTexto(
+                    value = firstname,
+                    onValueChange = { firstname = it },
+                    categoria = "First name",
+                    texto = "Escribe tu nombre"
+                )
+
+                CajasTexto(
+                    value = lastname,
+                    onValueChange = { lastname = it },
+                    categoria = "Last name",
+                    texto = "Escribe tus apellidos"
                 )
 
                 CajasTexto(
@@ -80,6 +122,15 @@ fun Login(innerPadding: PaddingValues, navController: NavController) {
                     contraseña = true
                 )
 
+                CajasTexto(
+                    value = password2,
+                    onValueChange = { password2 = it },
+                    categoria = "Confirma tu contraseña",
+                    texto = "Escribe nuevamente tu contraseña",
+                    contraseña2 = true
+                )
+
+
                 Button(
                     onClick = {},
                     modifier = Modifier
@@ -87,19 +138,18 @@ fun Login(innerPadding: PaddingValues, navController: NavController) {
                         .height(55.dp),
                     shape = RoundedCornerShape(topStart = 20.dp, bottomStart = 20.dp, bottomEnd = 20.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Black, // Color de fondo del botón
-                        contentColor = Color.White           // Color del texto
+                        containerColor = Color.Black,
+                        contentColor = Color.White
                     )
                 ){
-                    Text("Login")
+                    Text("Sign Up")
                 }
 
-                TextButton(onClick = { navController.navigate("register") },
+                TextButton(onClick = { navController.navigate("login") },
                     shape = RoundedCornerShape(1.dp)) {
-                    Text("Don’t have any account? Sign Up",
-                        color = Color.Gray,
-                        modifier = Modifier
-                            .padding(top = 75.dp))
+                    Text("Already have an account? Sign In",
+                        color = Color.Gray
+                    )
                 }
             }
         }
@@ -114,9 +164,9 @@ fun Login(innerPadding: PaddingValues, navController: NavController) {
     showSystemUi = true
 )
 @Composable
-fun LoginScreenPreview(){
+fun RegisterScreenPreview(){
     CLiedoLoginAppTheme {
-        Login(
+        Register(
             innerPadding = PaddingValues(0.dp),
             navController = rememberNavController()
         )
