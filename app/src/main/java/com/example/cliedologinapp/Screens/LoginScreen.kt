@@ -43,6 +43,7 @@ fun Login(innerPadding: PaddingValues, navController: NavController) {
             modifier = Modifier.fillMaxSize()
         )
 
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -103,6 +104,15 @@ fun Login(innerPadding: PaddingValues, navController: NavController) {
                 }
             }
         }
+
+        Image(
+            painter = painterResource(id = R.drawable.logo),
+            contentDescription = "Logo",
+            modifier = Modifier
+                .size(100.dp)
+                .offset(y = (-300).dp)
+                .align(Alignment.Center)
+        )
     }
 }
 
