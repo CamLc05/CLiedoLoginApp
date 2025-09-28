@@ -98,7 +98,7 @@ fun Login(innerPadding: PaddingValues, navController: NavController) {
                 TextButton(onClick = { navController.navigate("register") },
                     shape = RoundedCornerShape(1.dp)) {
                     Text("Don’t have any account? Sign Up",
-                        color = Color.Gray,
+                        color = Color.Black,
                         modifier = Modifier
                             .padding(top = 75.dp))
                 }

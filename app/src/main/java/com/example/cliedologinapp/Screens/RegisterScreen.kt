@@ -148,7 +148,7 @@ fun Register(innerPadding: PaddingValues, navController: NavController) {
                 TextButton(onClick = { navController.navigate("login") },
                     shape = RoundedCornerShape(1.dp)) {
                     Text("Already have an account? Sign In",
-                        color = Color.Gray
+                        color = Color.Black
                     )
                 }
             }
